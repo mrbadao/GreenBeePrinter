@@ -25,8 +25,7 @@ namespace GreenBeePrinter
 
         public frmMain()
         {
-            InitializeComponent();
-            this.listViewMain.View = View.LargeIcon;   
+            InitializeComponent();               
         }
         
 
@@ -34,29 +33,47 @@ namespace GreenBeePrinter
         {
             
             this.listViewMain.LargeImageList = Program.fruitsList;
-            ListViewItem item = new ListViewItem();
-            item.ImageIndex = 2;
-            item.Text = "item 1";
-            listViewMain.Items.Add(item);
+            barStaticCashierName.Caption = Program.cashier != null ? "Cashier: " + Program.cashier.display_name : "";
+            loadFruits();            
+        }
 
-            ListViewItem item1 = new ListViewItem();
-            item1.ImageIndex = 0;
-            item1.Text = "item 2";
-            listViewMain.Items.Add(item1);
+        private async void refreshFruits()
+        {
+            this.listViewMain.Items.Clear();
+            Program.fruitsList.Images.Clear();
+            await Program.getFruitPool();
+            loadFruits();
+        }
 
-            ListViewItem item2 = new ListViewItem();
-            item2.ImageIndex = 1;
-            item2.Text = "item 3";
-            listViewMain.Items.Add(item2);
+        private void loadFruits()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory + "fruits\\";
+            this.listViewMain.View = View.LargeIcon;
+            
+            if (Program.fruitPool != null)
+            {
+                foreach (Fruit fruit in Program.fruitPool)
+                {
+                    Program.fruitsList.Images.Add(Image.FromFile(path + fruit.image_name));
+                    ListViewItem item = new ListViewItem();
+                    item.Text = fruit.name;
+                    item.ImageIndex = Program.fruitsList.Images.Count-1;
+                    this.listViewMain.Items.Add(item);
+                }
+            }
         }
 
         private void iExit_ItemClick(object sender, ItemClickEventArgs e)
         {
+            Program.userAuthenticate = false;
+            Program.cashier = null;
             Application.Exit();
         }
 
         private void barBtnLogout_ItemClick(object sender, ItemClickEventArgs e)
         {
+            Program.userAuthenticate = false;
+            Program.cashier = null;
             Application.Restart();
             this.Close();
         }
@@ -79,13 +96,35 @@ namespace GreenBeePrinter
 
         private void barButtonPrint_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (this.listViewMain.CheckedItems.Count != 3)
+            {
+                MessageBox.Show("Out of 3", "Print error ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            foreach (ListViewItem item in this.listViewMain.CheckedItems)
+            {
+                item.Checked = false;
+                Program.fruitsList.Images[item.ImageIndex].Save(item.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            }
+            
             frmPrint printForm = new frmPrint();
             printForm.ShowDialog();
         }
 
-        private void ribbonControl_Click(object sender, EventArgs e)
+        private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
         {
+            refreshFruits();
+        }
 
+        private void barButtonPrintSetting_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            PrintDialog printSettingDialog = new PrintDialog();
+
+            if (printSettingDialog.ShowDialog() == DialogResult.OK)
+            {
+                Program.printSetting = printSettingDialog.PrinterSettings;
+            }
         }
 
     }

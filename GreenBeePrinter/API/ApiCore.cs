@@ -14,7 +14,7 @@ namespace GreenBeePrinter
 {
     public static class ApiCore
     {
-        const String apiBaseUrl = "http://192.168.1.52/greenbapi/";
+        const String apiBaseUrl = "http://api.greenbee.cf/";
 
         public static async Task<T> getJsonObj<T>(string action, Dictionary<string, string> postParams) where T : new()
         {
@@ -22,11 +22,13 @@ namespace GreenBeePrinter
             {
                 char[] charsToTrim = { ','};
                 String postData = "{\"Request-Agent\":\"Android\",\"data\":{";
-                foreach (var item in postParams)
-                {
-                    postData += "\"" + item.Key + "\"" + ":" + "\"" + item.Value + "\",";
-                }
-                ;
+
+                if (postParams != null)
+                    foreach (var item in postParams)
+                    {
+                        postData += "\"" + item.Key + "\"" + ":" + "\"" + item.Value + "\",";
+                    }
+                
                 postData = postData.TrimEnd(charsToTrim) + "}}";
                 
                 //MessageBox.Show(postData);
@@ -41,6 +43,7 @@ namespace GreenBeePrinter
                 if (response.IsSuccessStatusCode)
                 {
                     string responseAsString = await response.Content.ReadAsStringAsync();
+
                     dynamic jsonResultData = JsonConvert.DeserializeObject(responseAsString);
 
                     bool success = jsonResultData.success;

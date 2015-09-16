@@ -44,6 +44,7 @@
             this.txtLoginId.Name = "txtLoginId";
             this.txtLoginId.Size = new System.Drawing.Size(163, 20);
             this.txtLoginId.TabIndex = 0;
+            this.txtLoginId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLoginId_KeyDown);
             // 
             // txtLoginPassword
             // 
@@ -52,6 +53,7 @@
             this.txtLoginPassword.Properties.UseSystemPasswordChar = true;
             this.txtLoginPassword.Size = new System.Drawing.Size(163, 20);
             this.txtLoginPassword.TabIndex = 1;
+            this.txtLoginPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLoginPassword_KeyDown);
             // 
             // labelControl1
             // 
@@ -87,7 +89,7 @@
             this.btnLogin.Location = new System.Drawing.Point(102, 307);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 25);
-            this.btnLogin.TabIndex = 4;
+            this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
@@ -100,7 +102,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Tile;
             this.BackgroundImageStore = global::GreenBeePrinter.Properties.Resources.cmsPrinter_loginbg1;
-            this.ClientSize = new System.Drawing.Size(288, 342);
+            this.ClientSize = new System.Drawing.Size(284, 338);
             this.ControlBox = false;
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnExit);
@@ -116,6 +118,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "System Login";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtLoginId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLoginPassword.Properties)).EndInit();
             this.ResumeLayout(false);
