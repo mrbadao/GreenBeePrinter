@@ -16,25 +16,26 @@ using System.Threading;
 
 using System.Drawing.Printing;
 using System.IO;
+using DevExpress.XtraEditors.Controls;
+using Billing;
 
 namespace GreenBeePrinter
 {   
     public partial class frmMain : RibbonForm
-    {
-        
-
+    {       
         public frmMain()
         {
-            InitializeComponent();               
+            InitializeComponent();
+            Program.billingOder = new BillOreder(Program.printTemplate);
+            pictureBoxIcoCart.Image = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "images\\icon-cart.png");
         }
         
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            
-            this.listViewMain.LargeImageList = Program.fruitsList;
+            this.imageListBoxCart.ImageList = this.listViewMain.LargeImageList = Program.fruitsList;
             barStaticCashierName.Caption = Program.cashier != null ? "Cashier: " + Program.cashier.display_name : "";
-            loadFruits();            
+            loadFruits();
         }
 
         private async void refreshFruits()
@@ -57,6 +58,7 @@ namespace GreenBeePrinter
                     Program.fruitsList.Images.Add(Image.FromFile(path + fruit.image_name));
                     ListViewItem item = new ListViewItem();
                     item.Text = fruit.name;
+                    fruit.image_print = Image.FromFile(path + fruit.image_name);
                     item.ImageIndex = Program.fruitsList.Images.Count-1;
                     this.listViewMain.Items.Add(item);
                 }
@@ -96,20 +98,20 @@ namespace GreenBeePrinter
 
         private void barButtonPrint_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (this.listViewMain.CheckedItems.Count != 3)
+            if (!(Program.billingOder != null) || !Program.billingOder.canPrint())
             {
-                MessageBox.Show("Out of 3", "Print error ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nothing to print.", "Print error ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            foreach (ListViewItem item in this.listViewMain.CheckedItems)
+            if (Program.printSetting == null)
             {
-                item.Checked = false;
-                Program.fruitsList.Images[item.ImageIndex].Save(item.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                barButtonPrintSetting_ItemClick_1(sender, e);
             }
-            
+
             frmPrint printForm = new frmPrint();
             printForm.ShowDialog();
+            this.imageListBoxCart.Items.Clear();
         }
 
         private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
@@ -124,6 +126,34 @@ namespace GreenBeePrinter
             if (printSettingDialog.ShowDialog() == DialogResult.OK)
             {
                 Program.printSetting = printSettingDialog.PrinterSettings;
+            }
+        }
+
+        private void listViewMain_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.listViewMain.SelectedItems.Count != 0)
+            {
+                if (this.imageListBoxCart.Items.Count<3)
+                {  
+                    ImageListBoxItem item = new ImageListBoxItem(this.listViewMain.SelectedItems[0].Text, this.listViewMain.SelectedItems[0].ImageIndex);
+
+                    this.imageListBoxCart.Items.Add(item);                        
+                    Program.billingOder.addFruit(Program.fruitPool[this.listViewMain.SelectedItems[0].Index]);
+                }
+                else
+                {
+                    MessageBox.Show("Out of bound (3 Fruits only).", "Print error ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                             
+            }
+        }
+
+        private void imageListBoxCart_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.imageListBoxCart.SelectedItems.Count !=0)
+            {
+                int removeIdx = this.imageListBoxCart.Items.IndexOf(this.imageListBoxCart.SelectedItems[0]);
+                this.imageListBoxCart.Items.RemoveAt(removeIdx);
+                Program.billingOder.removeFruit(removeIdx);
             }
         }
 

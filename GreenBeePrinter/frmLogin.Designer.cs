@@ -76,7 +76,7 @@
             this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnExit.Image = global::GreenBeePrinter.Properties.Resources.btn_exit;
             this.btnExit.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(190, 307);
+            this.btnExit.Location = new System.Drawing.Point(190, 294);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 25);
             this.btnExit.TabIndex = 3;
@@ -86,7 +86,7 @@
             // btnLogin
             // 
             this.btnLogin.Image = global::GreenBeePrinter.Properties.Resources.btn_login;
-            this.btnLogin.Location = new System.Drawing.Point(102, 307);
+            this.btnLogin.Location = new System.Drawing.Point(102, 294);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 25);
             this.btnLogin.TabIndex = 2;
@@ -101,8 +101,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Tile;
-            this.BackgroundImageStore = global::GreenBeePrinter.Properties.Resources.cmsPrinter_loginbg1;
-            this.ClientSize = new System.Drawing.Size(284, 338);
+            this.BackgroundImageStore = global::GreenBeePrinter.Properties.Resources.cmsPrinter_loginbg2;
+            this.ClientSize = new System.Drawing.Size(294, 335);
             this.ControlBox = false;
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnExit);

@@ -14,7 +14,7 @@ namespace GreenBeePrinter
 {
     public static class ApiCore
     {
-        const String apiBaseUrl = "http://api.greenbee.cf/";
+        const String apiBaseUrl = "http://localhost/greenbapi/";
 
         public static async Task<T> getJsonObj<T>(string action, Dictionary<string, string> postParams) where T : new()
         {

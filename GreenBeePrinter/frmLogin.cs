@@ -61,9 +61,7 @@ namespace GreenBeePrinter
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            txtLoginId.Focus();
-            txtLoginId.Text = "dev_user";
-            txtLoginPassword.Text = "123456";
+            txtLoginId.Focus();            
         }
     }
 }

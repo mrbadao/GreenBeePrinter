@@ -71,7 +71,7 @@
             // 
             // pictureEdit2
             // 
-            this.pictureEdit2.EditValue = global::GreenBeePrinter.Properties.Resources.SplashScreen;
+            this.pictureEdit2.EditValue = global::GreenBeePrinter.Properties.Resources.SplashScreen1;
             this.pictureEdit2.Location = new System.Drawing.Point(12, 12);
             this.pictureEdit2.Name = "pictureEdit2";
             this.pictureEdit2.Properties.AllowFocused = false;

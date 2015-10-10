@@ -6,6 +6,7 @@ using System.IO;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Drawing.Printing;
+using Billing;
 
 namespace GreenBeePrinter
 {
@@ -15,9 +16,12 @@ namespace GreenBeePrinter
         public static Cashier cashier { get; set; }
 
         public static ImageList fruitsList;
+        public static string printTemplate;
         public static List<Fruit> fruitPool;
 
         public static PrinterSettings printSetting;
+
+        public static BillOreder billingOder;
 
         /// <summary>
         /// The main entry point for the application.
@@ -39,8 +43,10 @@ namespace GreenBeePrinter
             fruitsList.ImageSize = new Size(64, 64);
             fruitsList.Images.Clear();
 
-            printSetting = null;
+            printTemplate = AppDomain.CurrentDomain.BaseDirectory + "printtemplate\\nutrition.png";
 
+            printSetting = null;
+            billingOder = null;
             Program.getFruitPool();
             
 

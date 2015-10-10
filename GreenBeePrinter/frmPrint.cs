@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Billing;
 
 namespace GreenBeePrinter
 {
@@ -17,24 +18,26 @@ namespace GreenBeePrinter
 
         public frmPrint()
         {
-            printImage = Image.FromFile("nutrition.png");
             this.mPrinter = new Printer();
+            this.mPrinter.printerSettings(Program.printSetting);
             InitializeComponent();
         }
 
         private void frmPrint_Load(object sender, EventArgs e)
         {
-            picPrint.Image = printImage;
+            picPrint.Image = Program.billingOder.getPrintBillOrder();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            Program.billingOder = new BillOreder(Program.printTemplate);
             this.Close();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            mPrinter.Print(printImage);
+            mPrinter.Print(picPrint.Image);
+            Program.billingOder = new BillOreder(Program.printTemplate);
             this.Close();
         }
     }

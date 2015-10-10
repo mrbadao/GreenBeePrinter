@@ -29,10 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::GreenBeePrinter.SplashScreen1), true, true);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.navbarImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
-            this.navbarImageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.ribbonImageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.ribbonImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -72,9 +69,9 @@
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.imageListBoxCart = new DevExpress.XtraEditors.ImageListBoxControl();
+            this.pictureBoxIcoCart = new System.Windows.Forms.PictureBox();
             this.listViewMain = new System.Windows.Forms.ListView();
-            ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollectionLarge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -82,27 +79,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageListBoxCart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcoCart)).BeginInit();
             this.SuspendLayout();
-            // 
-            // navbarImageCollectionLarge
-            // 
-            this.navbarImageCollectionLarge.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("navbarImageCollectionLarge.ImageStream")));
-            this.navbarImageCollectionLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.navbarImageCollectionLarge.Images.SetKeyName(0, "Mail_16x16.png");
-            this.navbarImageCollectionLarge.Images.SetKeyName(1, "Organizer_16x16.png");
-            this.navbarImageCollectionLarge.Images.SetKeyName(2, "frappe.png");
-            // 
-            // navbarImageCollection
-            // 
-            this.navbarImageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("navbarImageCollection.ImageStream")));
-            this.navbarImageCollection.TransparentColor = System.Drawing.Color.Transparent;
-            this.navbarImageCollection.Images.SetKeyName(0, "Inbox_16x16.png");
-            this.navbarImageCollection.Images.SetKeyName(1, "Outbox_16x16.png");
-            this.navbarImageCollection.Images.SetKeyName(2, "Drafts_16x16.png");
-            this.navbarImageCollection.Images.SetKeyName(3, "Trash_16x16.png");
-            this.navbarImageCollection.Images.SetKeyName(4, "Calendar_16x16.png");
-            this.navbarImageCollection.Images.SetKeyName(5, "Tasks_16x16.png");
-            this.navbarImageCollection.Images.SetKeyName(6, "frappe.png");
             // 
             // ribbonImageCollection
             // 
@@ -138,12 +117,14 @@
             this.ribbonImageCollectionLarge.Images.SetKeyName(8, "Ribbon_Info_32x32.png");
             this.ribbonImageCollectionLarge.Images.SetKeyName(9, "btn_logout.png");
             this.ribbonImageCollectionLarge.Images.SetKeyName(10, "print-icon.png");
+            this.ribbonImageCollectionLarge.Images.SetKeyName(11, "refresh.png");
+            this.ribbonImageCollectionLarge.Images.SetKeyName(12, "print-setting-icon.png");
             // 
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticCashierName);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem1);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 436);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 517);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
             this.ribbonStatusBar.Size = new System.Drawing.Size(906, 31);
@@ -297,8 +278,8 @@
             // 
             this.barButtonItem5.Caption = "Refesh ";
             this.barButtonItem5.Id = 68;
-            this.barButtonItem5.ImageIndex = 2;
-            this.barButtonItem5.LargeImageIndex = 2;
+            this.barButtonItem5.ImageIndex = 11;
+            this.barButtonItem5.LargeImageIndex = 11;
             this.barButtonItem5.Name = "barButtonItem5";
             this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
             // 
@@ -306,8 +287,8 @@
             // 
             this.barButtonPrintSetting.Caption = "Print Setting";
             this.barButtonPrintSetting.Id = 77;
-            this.barButtonPrintSetting.ImageIndex = 4;
-            this.barButtonPrintSetting.LargeImageIndex = 4;
+            this.barButtonPrintSetting.ImageIndex = 12;
+            this.barButtonPrintSetting.LargeImageIndex = 12;
             this.barButtonPrintSetting.Name = "barButtonPrintSetting";
             this.barButtonPrintSetting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonPrintSetting_ItemClick_1);
             // 
@@ -459,30 +440,53 @@
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 144);
             this.splitContainerControl1.Name = "splitContainerControl1";
             this.splitContainerControl1.Panel1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.splitContainerControl1.Panel1.Controls.Add(this.imageListBoxCart);
+            this.splitContainerControl1.Panel1.Controls.Add(this.pictureBoxIcoCart);
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.listViewMain);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(906, 292);
+            this.splitContainerControl1.Size = new System.Drawing.Size(906, 373);
             this.splitContainerControl1.SplitterPosition = 237;
             this.splitContainerControl1.TabIndex = 11;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
+            // imageListBoxCart
+            // 
+            this.imageListBoxCart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.imageListBoxCart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageListBoxCart.ImageList = this.ribbonImageCollectionLarge;
+            this.imageListBoxCart.Location = new System.Drawing.Point(0, 50);
+            this.imageListBoxCart.Name = "imageListBoxCart";
+            this.imageListBoxCart.Size = new System.Drawing.Size(233, 319);
+            this.imageListBoxCart.TabIndex = 2;
+            this.imageListBoxCart.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.imageListBoxCart_MouseDoubleClick);
+            // 
+            // pictureBoxIcoCart
+            // 
+            this.pictureBoxIcoCart.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBoxIcoCart.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxIcoCart.Name = "pictureBoxIcoCart";
+            this.pictureBoxIcoCart.Size = new System.Drawing.Size(233, 50);
+            this.pictureBoxIcoCart.TabIndex = 0;
+            this.pictureBoxIcoCart.TabStop = false;
+            // 
             // listViewMain
             // 
-            this.listViewMain.CheckBoxes = true;
+            this.listViewMain.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listViewMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewMain.Location = new System.Drawing.Point(0, 0);
             this.listViewMain.Name = "listViewMain";
-            this.listViewMain.Size = new System.Drawing.Size(664, 292);
+            this.listViewMain.Size = new System.Drawing.Size(664, 373);
             this.listViewMain.TabIndex = 11;
             this.listViewMain.UseCompatibleStateImageBehavior = false;
+            this.listViewMain.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewMain_MouseDoubleClick);
             // 
             // frmMain
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 467);
+            this.ClientSize = new System.Drawing.Size(906, 548);
             this.Controls.Add(this.splitContainerControl1);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbonControl);
@@ -494,8 +498,6 @@
             this.Text = "GreenB Printer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollectionLarge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonImageCollectionLarge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
@@ -503,6 +505,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imageListBoxCart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcoCart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -513,8 +517,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.Utils.ImageCollection ribbonImageCollection;
         private DevExpress.Utils.ImageCollection ribbonImageCollectionLarge;
-        private DevExpress.Utils.ImageCollection navbarImageCollection;
-        private DevExpress.Utils.ImageCollection navbarImageCollectionLarge;
         private DevExpress.XtraBars.BarButtonItem iSaveAs;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup formatRibbonPageGroup;
         private DevExpress.XtraBars.BarButtonGroup fontStyleButtonGroup;
@@ -551,6 +553,8 @@
         private DevExpress.XtraBars.BarButtonItem barButtonPrintSetting;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageSetting;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private System.Windows.Forms.PictureBox pictureBoxIcoCart;
+        private DevExpress.XtraEditors.ImageListBoxControl imageListBoxCart;
 
     }
 }

@@ -7,6 +7,8 @@ using System.Drawing.Printing;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace GreenBeePrinter
 {
@@ -57,14 +59,18 @@ namespace GreenBeePrinter
 
         public void printerSettings(PrinterSettings printSettings)
         {
-            if(printSettings != null)
+            if (printSettings != null)
+            {
                 this.printer.PrinterSettings = printSettings;
+                PaperSize mPaperSize = new PaperSize("BillPage", 317, 515);
+                this.printer.DefaultPageSettings.PaperSize = mPaperSize;
+                this.printer.PrinterSettings.DefaultPageSettings.PaperSize = mPaperSize;
+            }
         }
 
         private void printPage(object sender, PrintPageEventArgs e)
-        {
-            Point p = new Point(100, 100);
-            e.Graphics.DrawImage(this.imagePrinted, 0 ,0);
+        {         
+            e.Graphics.DrawImage(this.imagePrinted, 0, 0, 227, 369);
         }
     }
 }

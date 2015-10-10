@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GreenBeePrinter</RootNamespace>
-    <AssemblyName>GreenBeePrinter</AssemblyName>
+    <AssemblyName>GreenBPrinter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -51,9 +51,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>greenb.ico</ApplicationIcon>
+    <ApplicationIcon>ico.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Billing">
+      <HintPath>..\Bulling\bin\Debug\Billing.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -84,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\ApiCore.cs" />
-    <Compile Include="Class\Fruit.cs" />
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +183,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="greenb.ico" />
+    <Content Include="ico.ico" />
+    <None Include="Resources\ico1.png" />
+    <None Include="Resources\ico.png" />
+    <None Include="Resources\cmsPrinter_loginbg1.png" />
+    <None Include="Resources\SplashScreen1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
